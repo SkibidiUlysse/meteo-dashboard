@@ -1,67 +1,114 @@
-# ⛅ Meteo Dashboard
+<p align="center">
+  <h1 align="center">⛅ Meteo Dashboard</h1>
+  <p align="center"><strong>Real-time weather intelligence with a cinematic HTML5 dashboard.</strong></p>
+</p>
 
-**Bulletin meteo automatique avec dashboard HTML5 interactif.**
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+  <img src="https://img.shields.io/badge/Canvas_API-FF6F00?style=for-the-badge&logo=html5&logoColor=white" />
+  <img src="https://img.shields.io/badge/Open--Meteo_API-00897B?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/No_API_Key-Required-00C853?style=for-the-badge" />
+</p>
 
-> Donnees en temps reel pour Lausanne, Chatel et Paris — sans cle API.
-
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-![API](https://img.shields.io/badge/API-Open--Meteo-00897B)
+<p align="center"><em>Weather data for Lausanne, Châtel & Paris — beautifully visualized, no API key needed.</em></p>
 
 ---
 
-## Fonctionnalites
+## How It Works
 
-### Script Python (`meteo.py`)
-- **3 villes** — Lausanne (Suisse), Chatel (Haute-Savoie), Paris
-- **API Open-Meteo** — gratuite, sans cle, fiable
-- **Bulletin complet** — temperature, vent, precipitations, UV, pression, humidite
-- **Phase lunaire** — calcul astronomique integre
-- **Conseils vestimentaires** — recommandations basees sur la meteo du jour
-- **Export texte** — genere un bulletin formate dans `meteo_bulletin.txt`
-- **Ouverture auto** — lance le dashboard HTML apres generation
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                                                                 │
+│   meteo.py                          index.html                  │
+│   ────────                          ──────────                  │
+│                                                                 │
+│   ┌───────────┐    HTTP GET    ┌──────────────┐                 │
+│   │  3 Cities │───────────────▶│  Open-Meteo  │                 │
+│   │  Configs  │◀───────────────│  Free API    │                 │
+│   └─────┬─────┘    JSON resp   └──────────────┘                 │
+│         │                                                       │
+│         ▼                                                       │
+│   ┌───────────┐    ┌───────────┐    ┌──────────────────────┐   │
+│   │  Weather   │───▶│  Lunar    │───▶│  Bulletin Generator  │   │
+│   │  Decoder   │    │  Phase    │    │  (text + HTML data)  │   │
+│   └───────────┘    │  Calc     │    └──────────┬───────────┘   │
+│                    └───────────┘               │               │
+│                                                ▼               │
+│                                    ┌──────────────────────┐    │
+│                                    │  Browser auto-open   │    │
+│                                    │  index.html          │    │
+│                                    └──────────┬───────────┘    │
+│                                               │                │
+│                                               ▼                │
+│                              ┌─────────────────────────────┐   │
+│                              │   Animated Canvas Dashboard │   │
+│                              │  ┌────────┬────────┬──────┐ │   │
+│                              │  │ Rain ☔ │ Snow ❄ │ ☀ ☁ │ │   │
+│                              │  │particles│falling │stars │ │   │
+│                              │  └────────┴────────┴──────┘ │   │
+│                              │  Dynamic bg · City tabs     │   │
+│                              │  Moon phase · Clothing tips │   │
+│                              └─────────────────────────────┘   │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
 
-### Dashboard HTML (`index.html`)
-- **Fond dynamique** — le gradient de fond change selon la meteo (soleil, pluie, neige, orage...)
-- **Variantes jour/nuit** — les couleurs s'adaptent a l'heure
-- **Particules animees** — pluie, neige, etoiles, nuages en temps reel sur le canvas
-- **Tabs par ville** — navigation fluide entre les 3 villes
-- **6 themes** — Sombre, Clair, Ocean, Foret, Rose, Miku
-- **Responsive** — s'adapte a toutes les tailles d'ecran
+## Features
 
-### Donnees affichees
-- Temperature actuelle & ressentie, min/max du jour
-- Vent (vitesse, rafales, direction avec boussole)
-- Precipitations, probabilite de pluie/neige
-- Index UV, pression atmospherique, humidite
-- Lever/coucher du soleil
-- Phase de la lune avec emoji
-- Qualite de l'air estimee
+### Python Backend (`meteo.py`)
+| Feature | Detail |
+|---------|--------|
+| **3 cities** | Lausanne (CH), Châtel (FR), Paris (FR) |
+| **Open-Meteo API** | Free, no key, no rate limit headaches |
+| **Full bulletin** | Temp, wind, precipitation, UV, pressure, humidity, sunrise/sunset |
+| **Lunar phase** | Astronomical computation — phase name + emoji |
+| **Clothing advisor** | What to wear based on today's conditions |
+| **Auto-launch** | Generates bulletin → opens dashboard in browser |
 
-## Installation
+### HTML5 Dashboard (`index.html`)
+| Feature | Detail |
+|---------|--------|
+| **Dynamic backgrounds** | Gradient shifts based on weather (sun, rain, snow, storm...) |
+| **Day/night variants** | Colors adapt to current hour |
+| **Particle engine** | Animated rain drops, snowflakes, stars, clouds on canvas |
+| **City tabs** | Smooth navigation between all 3 cities |
+| **6 themes** | Dark, Light, Ocean, Forest, Rose, Miku |
+| **Responsive** | Looks good on any screen size |
+
+### Data Points
+```
+Temperature (current, feels-like, min/max)
+Wind (speed, gusts, direction with compass)
+Precipitation (rain, snow, probability)
+UV Index · Atmospheric pressure · Humidity
+Sunrise & Sunset times
+Moon phase with visual emoji
+Estimated air quality
+```
+
+## Quick Start
 
 ```bash
-# Cloner le repo
 git clone https://github.com/SkibidiUlysse/meteo-dashboard.git
 cd meteo-dashboard
 
-# Lancer (Python 3.6+)
 pip install requests
 python meteo.py
+# → Generates bulletin + opens dashboard in browser
 ```
 
-Le script genere le bulletin et ouvre automatiquement `index.html` dans le navigateur.
+## Roadmap
 
-## Stack technique
-
-| Composant | Techno |
-|-----------|--------|
-| Backend | Python 3 + `requests` |
-| Frontend | HTML5 Canvas + CSS3 + JS vanilla |
-| API | [Open-Meteo](https://open-meteo.com/) (gratuite) |
-| Astronomie | Calcul de phase lunaire maison |
+- [ ] **Agentic outfit recommendation** — AI-powered clothing suggestions based on full-day forecast (morning commute vs. afternoon vs. evening), activity type, and personal style preferences
+- [ ] **Smart wardrobe integration** — connect to a wardrobe inventory to suggest specific items you own
+- [ ] **7-day forecast view** — extended forecast with daily cards
+- [ ] **Hourly timeline** — interactive hour-by-hour temperature & precipitation chart
+- [ ] **City search** — add any city worldwide via search
+- [ ] **PWA support** — installable as a mobile app
+- [ ] **Weather alerts** — push notifications for extreme conditions
+- [ ] **Historical comparison** — "today vs. same day last year"
 
 ---
 
-*La meteo, mais en plus beau.*
+<p align="center"><em>Weather, but beautiful.</em></p>
